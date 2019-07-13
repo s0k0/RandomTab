@@ -1,5 +1,6 @@
 {
   "name": "random-tab",
+  "author": "Sophie Kolbe",
   "version": "0.1.0",
   "private": true,
   "scripts": {
