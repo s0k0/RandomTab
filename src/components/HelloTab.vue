@@ -2,14 +2,14 @@
   <div class="tabs-container">
     <div class="tabs">
         <ul>
-          <li v-for="tab in tabs" v-bind:key="tab.id" :class="{ 'is-active': tab.isActive}">
+          <li v-for="tab in tabs" v-bind:key="tab.id" :class="{ 'is-active': tab.name === selectedTab.name}">
               <a @click="selectTab(tab)">{{ tab.name }}</a>
           </li>
         </ul>
       </div>
       <hr>
       <div class="tabs-details">
-         {{content}}
+         <p v-for="item in content" v-bind:key="item">{{ item }}</p>
       </div>
   </div>
 </template>
@@ -20,26 +20,26 @@ export default {
   data() {
       return { 
         tabs: [
-          { name: 'Topics', id: '1', isActive: false},
-          { name: 'Archive', id: '2',  isActive: false},
-          { name: 'Pages', id: '3',  isActive: false}
+          { name: 'Topics', id: '1'},
+          { name: 'Archive', id: '2'},
+          { name: 'Pages', id: '3'}
           ] ,
-        content: 'Hello Content'
+        selectedTab: {},
+        content: []
         };
   },
   created(){
     const index = Math.floor(Math.random() * this.tabs.length)
     this.selectTab(this.tabs[index])
   },
-  computed: {
-    //TODO: generate random content for each tab
-  },
   methods: {
     selectTab(selectedTab) {
-        this.tabs.forEach(tab => {
-            tab.isActive = (tab.name == selectedTab.name);
-        });
-        this.content = selectedTab.name
+        this.selectedTab = selectedTab
+        this.content = this.randomTopics(selectedTab.name)
+    },
+     randomTopics: (tabName) => {
+      const counter = Math.floor(Math.random() * 10) + 1
+      return Array.from(Array(counter), (x,index) => tabName.concat(index + 1))
     }
   }
 }
