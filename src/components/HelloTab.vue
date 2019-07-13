@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 <template>
   <div class="tabs-container">
     <div class="tabs">
@@ -21,7 +22,8 @@
           </div>
       </div>
       <div v-if="selectedTab.name ==='Pages'" class="tabs-pages-details">
-        <p v-for="item in pages" v-bind:key="item">{{ item }}</p>
+        <h1 id="my-color">{{ myColor }}</h1>
+        <button id="change-color" v-on:click="generateColor">New Color</button>
       </div>
   </div>
 </template>
@@ -36,7 +38,8 @@ export default {
           { name: 'Archive', id: '2'},
           { name: 'Pages', id: '3'}
           ] ,
-        selectedTab: {}
+        selectedTab: {},
+        myColor: '#000000'
         };
   },
   created(){
@@ -58,7 +61,11 @@ export default {
   methods: {
     selectTab(selectedTab) {
         this.selectedTab = selectedTab
-    }
+    },
+    generateColor: function(event){
+        this.myColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16)
+        document.body.style.background = this.myColor
+      }
   }
 }
 </script>
@@ -117,4 +124,25 @@ a {
       font-size: x-small;
   }
 }
+.tabs-pages-details {
+    h1 { 
+      text-align: center;
+      color: white;
+    }
+    button#change-color {
+      position: relative;
+      display: block;
+      margin: 0 auto;
+      width: 140px;
+      height: 30px;
+      border-radius: 30px;
+      color: #000000;
+      background: #fff;
+      border: 1px solid grey;
+      font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
+      outline: none;
+    }
+  }
 </style>
