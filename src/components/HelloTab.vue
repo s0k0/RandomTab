@@ -50,12 +50,10 @@ export default {
     archives: () => {
       return Array.from(Array(10), (x,index) => 'Grumpy Cat Contribute Nr.'.concat(index))
     },
+    //TODO: animate topics posts number
     topics: () => {
       const list = ['HTML Techniques', 'CSS Styling', 'Flash Tutorials', 'Web Miscanella', 'Site News', 'Web Development']
       return list.map( title => { return { title, posts: Math.floor(Math.random() * 100 ) } })
-    },
-    pages: () => {
-      return Array.from(Array(10), (x,index) => 'Pages number'.concat(index))
     }
   },
   methods: {
