@@ -24,11 +24,12 @@ export default {
             { name: 'Archive', id: '2',  isActive: false},
             { name: 'Pages', id: '3',  isActive: false}
             ] ,
-          content: 'Hello Conent'  
+          content: 'Hello Content'
           };
     },
-    computed: {
-
+    created(){
+      const index = Math.floor(Math.random() * this.tabs.length)
+      this.selectTab(this.tabs[index])
     },
     methods: {
       selectTab(selectedTab) {
@@ -41,7 +42,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped  lang="scss">
 .tabs-container {
   padding: 12px;
