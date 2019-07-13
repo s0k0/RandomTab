@@ -9,16 +9,19 @@
       </div>
       <hr>
       <div v-if="selectedTab.name ==='Topics'" class="tabs-topics-details">
-         <p v-for="item in content" v-bind:key="item">{{ item }}</p>
+         <div v-for="item in topics" v-bind:key="item.title">
+           <span class="topics-title">{{item.title}}</span>
+           <span class="topics-posts">{{item.posts}} POSTS</span>
+         </div>
       </div>
        <div v-if="selectedTab.name ==='Archive'" class="tabs-archive-details">
-         <div v-for="(item,index) in content" v-bind:key="index" class="">
+         <div v-for="(item,index) in archives" v-bind:key="index" class="">
            <img :src="require(`@/assets/grumpyCat${index}.jpeg`)"/>
            {{ item }}
           </div>
       </div>
-       <div v-if="selectedTab.name ==='Pages'" class="tabs-pages-details">
-         <p v-for="item in content" v-bind:key="item">{{ item }}</p>
+      <div v-if="selectedTab.name ==='Pages'" class="tabs-pages-details">
+        <p v-for="item in pages" v-bind:key="item">{{ item }}</p>
       </div>
   </div>
 </template>
@@ -33,8 +36,7 @@ export default {
           { name: 'Archive', id: '2'},
           { name: 'Pages', id: '3'}
           ] ,
-        selectedTab: {},
-        content: []
+        selectedTab: {}
         };
   },
   created(){
@@ -42,19 +44,20 @@ export default {
     this.selectTab(this.tabs[index])
   },
   computed: {
-    //TODO: 
-    // 1. create topics content and pages content
-    // 2. remove random generation of content
-    // 3. make achive content static
+    archives: () => {
+      return Array.from(Array(10), (x,index) => 'Grumpy Cat Contribute Nr.'.concat(index))
+    },
+    topics: () => {
+      const list = ['HTML Techniques', 'CSS Styling', 'Flash Tutorials', 'Web Miscanella', 'Site News', 'Web Development']
+      return list.map( title => { return { title, posts: Math.floor(Math.random() * 100 ) } })
+    },
+    pages: () => {
+      return Array.from(Array(10), (x,index) => 'Pages number'.concat(index))
+    }
   },
   methods: {
     selectTab(selectedTab) {
         this.selectedTab = selectedTab
-        this.content = this.randomTopics(selectedTab.name)
-    },
-    randomTopics: (tabName) => {
-      const counter = Math.floor(Math.random() * 10) + 1
-     return Array.from(Array(counter), (x,index) => tabName.concat(index + 1))
     }
   }
 }
@@ -62,7 +65,7 @@ export default {
 
 <style scoped  lang="scss">
 .tabs-container {
-  padding: 12px;
+  padding: 24px;
   background: rgba(66,185,131,0.1);
   text-align: left
 }
@@ -73,7 +76,7 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 12px 12px 0 0;
+  margin: 0 12px 0 0;
   font-size:larger
 }
 a {
@@ -87,8 +90,12 @@ a {
 }
 .tabs-archive-details {
   display: flex;
-  flex-direction: column;;
+  flex-direction: column;
   div {
+    @media(max-width: 500px) {
+      flex-direction: column;
+      margin-bottom: 24px; 
+    }
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -96,6 +103,18 @@ a {
   img {
     max-width: 100px;
     padding: 12px; 
+  }
+}
+.tabs-topics-details {
+  padding: 12px;
+  div {
+    padding: 12px;
+    border-bottom: 1px solid lightgray; 
+  }
+  .topics-posts {
+      padding-left: 12px;
+      color: gray;
+      font-size: x-small;
   }
 }
 </style>
