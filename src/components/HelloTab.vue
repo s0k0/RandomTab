@@ -1,23 +1,32 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div>
+    <div class="tabs">
+        <ul>
+          <li v-for="tab in tabs" v-bind:key="tab" :class="{ 'is-active': true}">
+              <a @click="selectTab(tab)">{{ tab }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tabs-details">
+        
+      </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'HelloTab',
-  props: {
-    msg: String
-  }
+  data() {
+        return { 
+          tabs: ['one','two','three'] 
+          };
+    },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
 ul {
   list-style-type: none;
   padding: 0;
@@ -28,5 +37,6 @@ li {
 }
 a {
   color: #42b983;
+  cursor: pointer;
 }
 </style>
