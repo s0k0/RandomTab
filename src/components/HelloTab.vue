@@ -18,26 +18,29 @@
 export default {
   name: 'HelloTab',
   data() {
-        return { 
-          tabs: [
-            { name: 'Topics', id: '1', isActive: false},
-            { name: 'Archive', id: '2',  isActive: false},
-            { name: 'Pages', id: '3',  isActive: false}
-            ] ,
-          content: 'Hello Content'
-          };
-    },
-    created(){
-      const index = Math.floor(Math.random() * this.tabs.length)
-      this.selectTab(this.tabs[index])
-    },
-    methods: {
-      selectTab(selectedTab) {
-          this.tabs.forEach(tab => {
-              tab.isActive = (tab.name == selectedTab.name);
-          });
-          this.content = selectedTab.name
-      }
+      return { 
+        tabs: [
+          { name: 'Topics', id: '1', isActive: false},
+          { name: 'Archive', id: '2',  isActive: false},
+          { name: 'Pages', id: '3',  isActive: false}
+          ] ,
+        content: 'Hello Content'
+        };
+  },
+  created(){
+    const index = Math.floor(Math.random() * this.tabs.length)
+    this.selectTab(this.tabs[index])
+  },
+  computed: {
+    //TODO: generate random content for each tab
+  },
+  methods: {
+    selectTab(selectedTab) {
+        this.tabs.forEach(tab => {
+            tab.isActive = (tab.name == selectedTab.name);
+        });
+        this.content = selectedTab.name
+    }
   }
 }
 </script>
