@@ -1,24 +1,27 @@
 <template>
   <div id="app">
-    <h1>Hello Random Browser Site<span>Select a tab ;)</span></h1>
-    <HelloTab/>
+    <h1>
+      Hello Random Browser Site
+      <span>Select a tab ;)</span>
+    </h1>
+    <HelloTab />
   </div>
 </template>
 
 <script>
-import HelloTab from './components/HelloTab.vue'
+import HelloTab from "./components/HelloTab.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     HelloTab
   }
-}
+};
 </script>
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
@@ -26,14 +29,14 @@ export default {
 }
 h1 {
   span {
-    margin-left: 12px; 
+    margin-left: 12px;
     font-size: small;
   }
-  @media(max-width: 600px) {
+  @media (max-width: 600px) {
     display: flex;
     flex-direction: column;
-    margin-bottom: 24px; 
-    text-align: center
+    margin-bottom: 24px;
+    text-align: center;
   }
 }
 </style>
