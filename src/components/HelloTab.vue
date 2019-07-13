@@ -8,7 +8,16 @@
         </ul>
       </div>
       <hr>
-      <div class="tabs-details">
+      <div v-if="selectedTab.name ==='Topics'" class="tabs-topics-details">
+         <p v-for="item in content" v-bind:key="item">{{ item }}</p>
+      </div>
+       <div v-if="selectedTab.name ==='Archive'" class="tabs-archive-details">
+         <div v-for="(item,index) in content" v-bind:key="index" class="">
+           <img :src="require(`@/assets/grumpyCat${index}.jpeg`)"/>
+           {{ item }}
+          </div>
+      </div>
+       <div v-if="selectedTab.name ==='Pages'" class="tabs-pages-details">
          <p v-for="item in content" v-bind:key="item">{{ item }}</p>
       </div>
   </div>
@@ -32,14 +41,20 @@ export default {
     const index = Math.floor(Math.random() * this.tabs.length)
     this.selectTab(this.tabs[index])
   },
+  computed: {
+    //TODO: 
+    // 1. create topics content and pages content
+    // 2. remove random generation of content
+    // 3. make achive content static
+  },
   methods: {
     selectTab(selectedTab) {
         this.selectedTab = selectedTab
         this.content = this.randomTopics(selectedTab.name)
     },
-     randomTopics: (tabName) => {
+    randomTopics: (tabName) => {
       const counter = Math.floor(Math.random() * 10) + 1
-      return Array.from(Array(counter), (x,index) => tabName.concat(index + 1))
+     return Array.from(Array(counter), (x,index) => tabName.concat(index + 1))
     }
   }
 }
@@ -68,6 +83,19 @@ a {
 .is-active {
   a {
     color: #42b983;
+  }
+}
+.tabs-archive-details {
+  display: flex;
+  flex-direction: column;;
+  div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  img {
+    max-width: 100px;
+    padding: 12px; 
   }
 }
 </style>
